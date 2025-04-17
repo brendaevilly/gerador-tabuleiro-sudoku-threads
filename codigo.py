@@ -63,6 +63,16 @@ def validarlinha(tabuleiro):
             return
         resultado_linhas = True
 
+def validarcoluna(tabuleiro):
+    global resultado_colunas
+    for i in range(9):
+        coluna = tabuleiro[j][i] for j in range[9]
+        if sorted(coluna) != lista(range(1,9)):
+            resultado_colunas = False
+            return
+        resultado_colunas = True
+
+
 
 #cria o tabuliero vazio
 tabuleiro = [[0 for _ in range(9)] for _ in range(9)]  
@@ -74,11 +84,14 @@ imprimeTabuleiro(tabuleiro)
 
 #cria a primeira threads( falta as outras duas)
 t1 = threading.Thread(target=validarlinha, args=(tabuleiro,))
+t2 = threading.Thread(target=validarcoluna, args=(tabuleiro,))
 
 t1.start()
+t2.start()
 
 #espera as threads terminaren
 t1.join()
+t2.join()
 
-
+#falta so a de validar os blocos e imprimir 
 
