@@ -66,7 +66,7 @@ def validarlinha(tabuleiro):
 def validarcoluna(tabuleiro):
     global resultado_colunas
     for i in range(9):
-        coluna = tabuleiro[j][i] for j in range[9]
+        coluna = tabuleiro[i][j] for j in range[9]
         if sorted(coluna) != lista(range(1,9)):
             resultado_colunas = False
             return
