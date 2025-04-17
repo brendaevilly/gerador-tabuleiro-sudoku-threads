@@ -82,10 +82,11 @@ preenchertabuleiro(tabuleiro)
 print(" Sudoku:")
 imprimeTabuleiro(tabuleiro)
 
-#cria a primeira threads( falta as outras duas)
+#cria a primeira e segunda threads( falta a da bloco)
 t1 = threading.Thread(target=validarlinha, args=(tabuleiro,))
 t2 = threading.Thread(target=validarcoluna, args=(tabuleiro,))
 
+#abre as threads 
 t1.start()
 t2.start()
 
