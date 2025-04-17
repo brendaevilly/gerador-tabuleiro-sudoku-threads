@@ -49,7 +49,7 @@ def preenchertabuleiro(tabuleiro):
                      return True
                  tabuleiro[linha][coluna] = 0
      return False
-     return True
+    
 
 resultado_linhas = False
 resultado_colunas = False
