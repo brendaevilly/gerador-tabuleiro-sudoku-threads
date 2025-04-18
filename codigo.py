@@ -32,7 +32,6 @@ def validarNumero(tabuleiro, linha, coluna, num):
     #Se o número não existe na linha, na coluna e no bloco 3x3 dentro do tabuleiro, a função retorna True.
     return True
 
-<<<<<<< HEAD
 def preenchertabuleiro(tabuleiro):
     for linha in range(9):
         for coluna in range(9):
@@ -48,7 +47,7 @@ def preenchertabuleiro(tabuleiro):
                 if preenchertabuleiro(tabuleiro):
                     return True
                 tabuleiro[linha][coluna] = 0
-    return False
+                return False
     return True
 
 resultado_linhas = False
@@ -72,47 +71,6 @@ def validarcoluna(tabuleiro):
             return
         resultado_colunas = True
 
-#preenche o tabuleiro
-def preenchertabuleiro(tabuleiro):
-    for linha in range(9):
-        for coluna in range(9):
-            if tabuleiro[linha][coluna] == 0:
-                #cria uma lista com numero de 1 a 9
-                numeros = list(range(1,10))
-                #embaralha a ordem 
-                random.shuffle(numeros)
-            
-            for num in numeros:
-                if validarNumero(tabuleiro, linha, coluna, num):
-                    tabuleiro[linha][coluna]= num
-                    if preenchertabuleiro(tabuleiro):
-                        return True
-                    tabuleiro[linha][coluna] = 0
-                    return False
-    return True
-     
-
-resultado_linhas = False
-resultado_colunas = False
-resultado_blocos = False
-                 
-def validarlinha(tabuleiro):
-    global resultado_linhas
-    for linha in tabuleiro:
-        if sorted(linha) != list (range(1,10)):
-            resultado_linhas = False 
-            return
-        resultado_linhas = True
-
-def validarcoluna(tabuleiro):
-    global resultado_colunas
-    for i in range(9):
-        coluna = [tabuleiro[j][i] for j in range[9]]
-        if sorted(coluna) != list(range(1,10)):
-            resultado_colunas = False
-            return
-        resultado_colunas = True
-
 tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -122,52 +80,6 @@ tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
-=======
- #preenche o tabuleiro
-def preenchertabuleiro(tabuleiro):
-     for linha in range(9):
-         for coluna in range(9):
-             if tabuleiro[linha][coluna] == 0:
-              #cria uma lista com numero de 1 a 9
-              numeros = list(range(1,10))
-              #embaralha a ordem 
-              random.shuffle(numeros)
-              
-              for num in numeros:
-                if validarNumero(tabuleiro, linha, coluna, num):
-                 tabuleiro[linha][coluna]= num
-                 if preenchertabuleiro(tabuleiro):
-                     return True
-                 tabuleiro[linha][coluna] = 0
-                 return False
-     return True
-     
->>>>>>> 1465ad7cdbb195494d5115cc97b8a89ad008caf9
-
-resultado_linhas = False
-resultado_colunas = False
-resultado_blocos = False
-                 
-def validarlinha(tabuleiro):
-    global resultado_linhas
-    for linha in tabuleiro:
-        if sorted(linha) != list (range(1,10)):
-            resultado_linhas = False 
-            return
-        resultado_linhas = True
-
-def validarcoluna(tabuleiro):
-    global resultado_colunas
-    for i in range(9):
-        coluna = [tabuleiro[j][i] for j in range[9]]
-        if sorted(coluna) != list(range(1,10)):
-            resultado_colunas = False
-            return
-        resultado_colunas = True
-
-
-#cria o tabuliero vazio
-tabuleiro = [[0 for _ in range(9)] for _ in range(9)]  
 
 preenchertabuleiro(tabuleiro)
 print("Tabuleiro preenchido com sucesso!")
@@ -175,16 +87,13 @@ print("Tabuleiro preenchido com sucesso!")
 print(" Sudoku:")
 imprimeTabuleiro(tabuleiro)
 
-<<<<<<< HEAD
 preenchertabuleiro(tabuleiro)
 print("Tabuleiro preenchido com sucesso!")
 
 print(" Sudoku:")
 imprimeTabuleiro(tabuleiro)
 
-=======
->>>>>>> 1465ad7cdbb195494d5115cc97b8a89ad008caf9
-#cria a primeira e segunda threads( falta a do bloco)
+
 t1 = threading.Thread(target=validarlinha, args=(tabuleiro,))
 t2 = threading.Thread(target=validarcoluna, args=(tabuleiro,))
 
@@ -195,14 +104,6 @@ t2.start()
 
 #espera as threads terminaren
 t1.join()
-<<<<<<< HEAD
 t2.join()
-=======
 t2.join()
 
-
-
-
-
-
->>>>>>> 1465ad7cdbb195494d5115cc97b8a89ad008caf9
