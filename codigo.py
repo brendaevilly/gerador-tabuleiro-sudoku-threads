@@ -16,7 +16,7 @@ def imprimeTabuleiro(tabuleiro):
 def validarNumero(tabuleiro, linha, coluna, num):
     #Verifica se um número já existe na linha ou na coluna.
     for i in range(0, 9):
-        if tabuleiro[linha][i] == num or tabuleiro[i][linha] == num:
+        if tabuleiro[linha][i] == num or tabuleiro[i][coluna] == num:
             return False
         
     #Identifica o bloco 3x3 dentro do tabuleiro 9x9 que o número vai ou não ser inserido.
@@ -37,16 +37,16 @@ def preencherTabuleiro(tabuleiro):
         for coluna in range(9):
             if tabuleiro[linha][coluna] == 0:
                 #cria uma lista com numero de 1 a 9
-                numeros = list(range(1,9))
+                numeros = list(range(1,10))
                 #embaralha a ordem 
                 random.shuffle(numeros)
               
-            for num in numeros:
-                if validarNumero(tabuleiro, linha, coluna, num):
-                    tabuleiro[linha][coluna]= num
-                if preencherTabuleiro(tabuleiro):
-                    return True
-                tabuleiro[linha][coluna] = 0
+                for num in numeros:
+                    if validarNumero(tabuleiro, linha, coluna, num):
+                        tabuleiro[linha][coluna]= num
+                        if preencherTabuleiro(tabuleiro):
+                            return True
+                        tabuleiro[linha][coluna] = 0
                 return False
     return True
 
@@ -57,10 +57,10 @@ resultado_blocos = False
 def validarLinha(tabuleiro):
     global resultado_linhas
     for linha in tabuleiro:
-        if sorted(linha) != list (range(1,9)):
+        if sorted(linha) != list (range(1,10)):
             resultado_linhas = False 
             return
-        resultado_linhas = True
+    resultado_linhas = True
 
 def validarColuna(tabuleiro):
     global resultado_colunas
@@ -70,6 +70,20 @@ def validarColuna(tabuleiro):
             resultado_colunas = False
             return
     resultado_colunas = True
+
+def validarBlocos(tabuleiro):
+    global resultado_blocos
+    for blocoLinha in range(0, 9, 3):
+        for blocoColuna in range(0, 9, 3):
+            numeros = []
+            for i in range(3):
+                for j in range(3):
+                    numeros.append(tabuleiro[blocoLinha+i][blocoColuna+j])
+            if sorted(numeros) != list(range(1, 10)):
+                resultado_blocos = False
+                return
+    resultado_blocos = True
+
 
 tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -84,19 +98,31 @@ tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
 preencherTabuleiro(tabuleiro)
 print("Tabuleiro preenchido com sucesso!")
 
-print(" Sudoku:")
+print("---- SUDOKU ----")
 imprimeTabuleiro(tabuleiro)
 
 
 t1 = threading.Thread(target=validarLinha, args=(tabuleiro,))
 t2 = threading.Thread(target=validarColuna, args=(tabuleiro,))
+t3 = threading.Thread(target=validarBlocos, args=(tabuleiro,))
 
 
 t1.start()
 t2.start()
+t3.start()
 
 
 #espera as threads terminaren
 t1.join()
 t2.join()
+t3.join()
 
+print("---- VALIDAÇÃO ----")
+print(f"Linhas válidas: {resultado_linhas}")
+print(f"Colunas válidas: {resultado_colunas}")
+print(f"Blocos 3x3 válidos: {resultado_blocos}")
+
+if resultado_linhas and resultado_colunas and resultado_blocos:
+    print("# SUDOKU VÁLIDO")
+else:
+    print("# SUDOKU INVÁLIDO")
