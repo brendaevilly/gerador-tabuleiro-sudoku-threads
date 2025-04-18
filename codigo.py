@@ -38,7 +38,7 @@ def preenchertabuleiro(tabuleiro):
          for coluna in range(9):
              if tabuleiro[linha][coluna] == 0:
               #cria uma lista com numero de 1 a 9
-              numeros = list(range(1,9))
+              numeros = list(range(1,10))
               #embaralha a ordem 
               random.shuffle(numeros)
               
@@ -48,8 +48,9 @@ def preenchertabuleiro(tabuleiro):
                  if preenchertabuleiro(tabuleiro):
                      return True
                  tabuleiro[linha][coluna] = 0
-     return False
-    
+                 return False
+     return True
+     
 
 resultado_linhas = False
 resultado_colunas = False
@@ -58,7 +59,7 @@ resultado_blocos = False
 def validarlinha(tabuleiro):
     global resultado_linhas
     for linha in tabuleiro:
-        if sorted(linha) != list (range(1,9)):
+        if sorted(linha) != list (range(1,10)):
             resultado_linhas = False 
             return
         resultado_linhas = True
@@ -66,33 +67,36 @@ def validarlinha(tabuleiro):
 def validarcoluna(tabuleiro):
     global resultado_colunas
     for i in range(9):
-        coluna = tabuleiro[i][j] for j in range[9]
-        if sorted(coluna) != lista(range(1,9)):
+        coluna = [tabuleiro[j][i] for j in range[9]]
+        if sorted(coluna) != list(range(1,10)):
             resultado_colunas = False
             return
         resultado_colunas = True
-
 
 
 #cria o tabuliero vazio
 tabuleiro = [[0 for _ in range(9)] for _ in range(9)]  
 
 preenchertabuleiro(tabuleiro)
+print("Tabuleiro preenchido com sucesso!")
 
 print(" Sudoku:")
 imprimeTabuleiro(tabuleiro)
 
-#cria a primeira e segunda threads( falta a da bloco)
+#cria a primeira e segunda threads( falta a do bloco)
 t1 = threading.Thread(target=validarlinha, args=(tabuleiro,))
 t2 = threading.Thread(target=validarcoluna, args=(tabuleiro,))
 
-#abre as threads 
+
 t1.start()
 t2.start()
+
 
 #espera as threads terminaren
 t1.join()
 t2.join()
 
-#falta so a de validar os blocos e imprimir 
+
+
+
 
