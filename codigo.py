@@ -32,7 +32,7 @@ def validarNumero(tabuleiro, linha, coluna, num):
     #Se o número não existe na linha, na coluna e no bloco 3x3 dentro do tabuleiro, a função retorna True.
     return True
 
-def preenchertabuleiro(tabuleiro):
+def preencherTabuleiro(tabuleiro):
     for linha in range(9):
         for coluna in range(9):
             if tabuleiro[linha][coluna] == 0:
@@ -44,7 +44,7 @@ def preenchertabuleiro(tabuleiro):
             for num in numeros:
                 if validarNumero(tabuleiro, linha, coluna, num):
                     tabuleiro[linha][coluna]= num
-                if preenchertabuleiro(tabuleiro):
+                if preencherTabuleiro(tabuleiro):
                     return True
                 tabuleiro[linha][coluna] = 0
                 return False
@@ -54,7 +54,7 @@ resultado_linhas = False
 resultado_colunas = False
 resultado_blocos = False
                  
-def validarlinha(tabuleiro):
+def validarLinha(tabuleiro):
     global resultado_linhas
     for linha in tabuleiro:
         if sorted(linha) != list (range(1,9)):
@@ -62,14 +62,14 @@ def validarlinha(tabuleiro):
             return
         resultado_linhas = True
 
-def validarcoluna(tabuleiro):
+def validarColuna(tabuleiro):
     global resultado_colunas
     for i in range(9):
-        coluna = tabuleiro[i][j] for j in range[9]
-        if sorted(coluna) != list(range(1,9)):
+        coluna = [tabuleiro[j][i] for j in range(9)]
+        if sorted(coluna) != list(range(1,10)):
             resultado_colunas = False
             return
-        resultado_colunas = True
+    resultado_colunas = True
 
 tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -81,21 +81,15 @@ tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-preenchertabuleiro(tabuleiro)
-print("Tabuleiro preenchido com sucesso!")
-
-print(" Sudoku:")
-imprimeTabuleiro(tabuleiro)
-
-preenchertabuleiro(tabuleiro)
+preencherTabuleiro(tabuleiro)
 print("Tabuleiro preenchido com sucesso!")
 
 print(" Sudoku:")
 imprimeTabuleiro(tabuleiro)
 
 
-t1 = threading.Thread(target=validarlinha, args=(tabuleiro,))
-t2 = threading.Thread(target=validarcoluna, args=(tabuleiro,))
+t1 = threading.Thread(target=validarLinha, args=(tabuleiro,))
+t2 = threading.Thread(target=validarColuna, args=(tabuleiro,))
 
 
 t1.start()
@@ -104,6 +98,5 @@ t2.start()
 
 #espera as threads terminaren
 t1.join()
-t2.join()
 t2.join()
 
