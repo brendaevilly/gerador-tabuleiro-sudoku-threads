@@ -54,6 +54,7 @@ def validarTudo(tabuleiro, index, resultado_linhas, resultado_colunas, resultado
     if sorted(numeros) != list(range(1, 10)):
         resultado_blocos[index] = False
 
+'''
 tabuleiro = [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -65,10 +66,8 @@ tabuleiro = [
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9]
     ]
-
 '''
 tabuleiro = [[0]*9 for _ in range(9)]
-'''
 
 inicio = time.time()
 preencherTabuleiro(tabuleiro)
