@@ -64,7 +64,6 @@ def validarBlocos(tabuleiro, resultado):
                 return
     resultado[2] = True
 
-'''
 tabuleiro = [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -76,8 +75,8 @@ tabuleiro = [
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9]
     ]
-'''
-tabuleiro = [[0]*9 for _ in range(9)]
+
+'''tabuleiro = [[0]*9 for _ in range(9)]'''
 
 inicio = time.time()
 preencherTabuleiro(tabuleiro)
@@ -86,6 +85,7 @@ fim = time.time()
 print("Tabuleiro preenchido com sucesso!")
 print("---- SUDOKU ----")
 imprimeTabuleiro(tabuleiro)
+
 
 resultado = [True, True, True]
 

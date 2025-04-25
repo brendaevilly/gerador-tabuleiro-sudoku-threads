@@ -56,7 +56,6 @@ def validarBlocoIndividual(tabuleiro, blocoIndex, resultado):
     if sorted(numeros) != list(range(1, 10)):
         resultado[blocoIndex] = False
 
-'''
 tabuleiro = [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -68,17 +67,16 @@ tabuleiro = [
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9]
     ]
-'''
-tabuleiro = [[0]*9 for _ in range(9)]
 
-inicio = time.time()
+'''tabuleiro = [[0]*9 for _ in range(9)]'''
+
 preencherTabuleiro(tabuleiro)
-fim = time.time()
 
 print("Tabuleiro preenchido com sucesso!")
 print("---- SUDOKU ----")
 imprimeTabuleiro(tabuleiro)
 
+inicio = time.time()
 resultado_linhas = [True] * 9
 resultado_colunas = [True] * 9
 resultado_blocos = [True] * 9
@@ -102,6 +100,8 @@ for t in threads:
 
 for t in threads:
     t.join()
+
+fim = time.time()
 
 print("---- VALIDAÇÃO ----")
 print(f"Linhas válidas: {all(resultado_linhas)}")
